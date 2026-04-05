@@ -1,13 +1,10 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { requireUserId } from "@/lib/require-user";
 import { updateCustomerSchema } from "@/lib/validation";
 
 type Params = { params: Promise<{ id: string }> };
 
 export async function PATCH(request: Request, { params }: Params) {
-  const gate = await requireUserId();
-  if (gate instanceof NextResponse) return gate;
   const { id } = await params;
   let body: unknown;
   try {
@@ -36,8 +33,6 @@ export async function PATCH(request: Request, { params }: Params) {
 }
 
 export async function DELETE(_request: Request, { params }: Params) {
-  const gate = await requireUserId();
-  if (gate instanceof NextResponse) return gate;
   const { id } = await params;
   try {
     await prisma.customer.delete({ where: { id } });

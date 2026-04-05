@@ -15,8 +15,8 @@ export default function HomePage() {
           <p className="mt-4 text-base font-medium text-zinc-800 dark:text-zinc-200">
             This site is a <strong className="font-semibold">QR code generator</strong>: you type what
             people should get when they scan (a link, a network, a phone number, etc.), and we draw
-            the square pattern phones read. Sign in (free) to use the generator studio; nothing is
-            sent to an external &quot;QR service&quot; — generation runs on this app.
+            the square pattern phones read. No account required to try it; nothing is sent to an
+            external &quot;QR service&quot; — generation runs on this app.
           </p>
           <p className="mt-4 max-w-2xl text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
             Save <strong className="font-medium text-zinc-800 dark:text-zinc-200">customer colour</strong>{" "}

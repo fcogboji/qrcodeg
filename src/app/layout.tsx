@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { ClerkProvider } from "@clerk/nextjs";
 import { Geist, Geist_Mono } from "next/font/google";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -38,22 +37,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
-      <html
-        lang="en"
-        className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-      >
-        <body className="font-sans min-h-full flex flex-col bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-50">
-          <SiteHeader />
-          <div className="flex-1">{children}</div>
-          <SiteFooter />
-          <Script
-            src="/embed/widget-js"
-            strategy="afterInteractive"
-            {...widgetDataAttributes}
-          />
-        </body>
-      </html>
-    </ClerkProvider>
+    <html
+      lang="en"
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+    >
+      <body className="font-sans min-h-full flex flex-col bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-50">
+        <SiteHeader />
+        <div className="flex-1">{children}</div>
+        <SiteFooter />
+        <Script
+          src="/embed/widget-js"
+          strategy="afterInteractive"
+          {...widgetDataAttributes}
+        />
+      </body>
+    </html>
   );
 }
