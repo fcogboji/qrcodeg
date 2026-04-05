@@ -15,8 +15,8 @@ export default function HomePage() {
           <p className="mt-4 text-base font-medium text-zinc-800 dark:text-zinc-200">
             This site is a <strong className="font-semibold">QR code generator</strong>: you type what
             people should get when they scan (a link, a network, a phone number, etc.), and we draw
-            the square pattern phones read. No account required to try it; nothing is sent to an
-            external &quot;QR service&quot; — generation runs on this app.
+            the square pattern phones read. Sign in (free) to use the generator studio; nothing is
+            sent to an external &quot;QR service&quot; — generation runs on this app.
           </p>
           <p className="mt-4 max-w-2xl text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
             Save <strong className="font-medium text-zinc-800 dark:text-zinc-200">customer colour</strong>{" "}
@@ -76,8 +76,9 @@ export default function HomePage() {
           <article>
             <h3 className="font-medium text-zinc-900 dark:text-zinc-100">Production operations</h3>
             <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-              SQLite ships by default for zero-config demos; point DATABASE_URL at PostgreSQL for real
-              deployments. The build runs Prisma generate and migrate deploy. A lightweight /api/health
+              The app uses <strong className="font-medium text-zinc-800 dark:text-zinc-200">Neon</strong>{" "}
+              Postgres (<code className="rounded bg-zinc-200 px-1 text-xs dark:bg-zinc-800">DATABASE_URL</code>
+              ). The build runs Prisma generate. Run migrations against your Neon branch. A lightweight /api/health
               route executes SELECT 1 so orchestrators can wire liveness and readiness probes without
               custom scripts.
             </p>

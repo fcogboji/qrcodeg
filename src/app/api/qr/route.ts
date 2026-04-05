@@ -1,9 +1,12 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { generateQr } from "@/lib/qr";
+import { requireUserId } from "@/lib/require-user";
 import { qrRequestSchema } from "@/lib/validation";
 
 export async function POST(request: Request) {
+  const gate = await requireUserId();
+  if (gate instanceof NextResponse) return gate;
   let body: unknown;
   try {
     body = await request.json();

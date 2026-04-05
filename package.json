@@ -13,6 +13,7 @@
     "db:studio": "prisma studio"
   },
   "dependencies": {
+    "@clerk/nextjs": "^7.0.8",
     "@prisma/client": "^6.19.3",
     "next": "16.2.2",
     "qrcode": "^1.5.4",

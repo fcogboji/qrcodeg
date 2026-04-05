@@ -34,7 +34,7 @@ yarn-error.log*
 .env*
 !.env.example
 
-# local sqlite
+# local sqlite (legacy; project uses Neon/Postgres)
 /prisma/*.db
 /prisma/*.db-journal
 

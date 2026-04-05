@@ -31,9 +31,14 @@ export function SiteFooter() {
                 </Link>
               </li>
               <li>
-                <Link className="hover:text-zinc-900 dark:hover:text-zinc-200" href="/api/health">
+                <a
+                  className="hover:text-zinc-900 dark:hover:text-zinc-200"
+                  href="/api/health"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   Health check (JSON)
-                </Link>
+                </a>
               </li>
             </ul>
           </div>

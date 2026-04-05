@@ -149,10 +149,11 @@ export default function IntegrationPage() {
             context.
           </p>
           <p className="mt-4">
-            Database credentials belong in environment variables. Rotate them on the same schedule as
-            your other application secrets. For PostgreSQL, enable TLS to the instance and restrict
-            network access to your application subnets. SQLite is appropriate for demos and
-            single-tenant appliances, not for horizontally scaled web fleets.
+            Database credentials belong in environment variables. This project targets{" "}
+            <strong className="font-medium text-zinc-900 dark:text-zinc-100">Neon</strong> serverless
+            Postgres: use TLS (<code className="rounded bg-zinc-200 px-1 text-xs dark:bg-zinc-800">sslmode=require</code>
+            ), rotate API keys on the same schedule as other secrets, and prefer Neon&apos;s pooled
+            connection string for serverless runtimes when you deploy at scale.
           </p>
         </section>
 

@@ -1,14 +1,19 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { requireUserId } from "@/lib/require-user";
 import { createCustomerSchema } from "@/lib/validation";
 import { slugify } from "@/lib/slug";
 
 export async function GET() {
+  const gate = await requireUserId();
+  if (gate instanceof NextResponse) return gate;
   const customers = await prisma.customer.findMany({ orderBy: { updatedAt: "desc" } });
   return NextResponse.json({ customers });
 }
 
 export async function POST(request: Request) {
+  const gate = await requireUserId();
+  if (gate instanceof NextResponse) return gate;
   let body: unknown;
   try {
     body = await request.json();
