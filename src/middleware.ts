@@ -1,12 +1,10 @@
-import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { clerkMiddleware } from "@clerk/nextjs/server";
 
-const isStudioRoute = createRouteMatcher(["/studio(.*)"]);
-
-export default clerkMiddleware(async (auth, req) => {
-  if (isStudioRoute(req)) {
-    await auth.protect();
-  }
-});
+/**
+ * Keep middleware minimal for Vercel Edge — custom `auth.protect()` here has caused
+ * MIDDLEWARE_INVOCATION_FAILED. Route protection uses `auth.protect()` in server layouts instead.
+ */
+export default clerkMiddleware();
 
 export const config = {
   matcher: [
