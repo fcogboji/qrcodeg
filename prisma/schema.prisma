@@ -7,6 +7,16 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+/// App user (Auth.js credentials).
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 /// Brand profile for per-customer QR styling (widget / SaaS tenants).
 model Customer {
   id          String   @id @default(cuid())

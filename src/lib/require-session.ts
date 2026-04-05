@@ -1,0 +1,10 @@
+import { auth } from "@/auth";
+import { NextResponse } from "next/server";
+
+export async function requireSession() {
+  const session = await auth();
+  if (!session?.user?.id) {
+    return NextResponse.json({ error: "Sign in required" }, { status: 401 });
+  }
+  return session;
+}
