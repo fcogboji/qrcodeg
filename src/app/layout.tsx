@@ -44,7 +44,13 @@ export default function RootLayout({
         <SiteHeader />
         <div className="flex-1">{children}</div>
         <SiteFooter />
-        <Script src="https://24-7concept-pew4inhis-friday-s-projects.vercel.app/widget.js" defer data-api-base="https://24-7concept-pew4inhis-friday-s-projects.vercel.app" data-bot-id="cmnlweicd000110vl1ij6guu1" data-brand="qrcodeg" />
+        <Script
+          src="/embed/widget-js"
+          strategy="afterInteractive"
+          data-api-base="https://24-7concept-pew4inhis-friday-s-projects.vercel.app"
+          data-bot-id="cmnlweicd000110vl1ij6guu1"
+          data-brand="qrcodeg"
+        />
       </body>
     </html>
   );
