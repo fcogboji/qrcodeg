@@ -8,10 +8,14 @@ import {
 const UPSTREAM_WIDGET =
   process.env.WIDGET_SCRIPT_UPSTREAM_URL?.trim() || WIDGET_SCRIPT_URL;
 
+/** One-line console helper when the widget host rejects anonymous access (browser would 401 too). */
+function clientAuthBlockedMessage(): string {
+  return `console.warn("[widget] ${WIDGET_SCRIPT_URL} returned 401/403. Disable Vercel Deployment Protection on the widget project, host widget.js on a public URL, or set WIDGET_VERCEL_BYPASS_SECRET on this app so /embed/widget-js can proxy the real file.");`;
+}
+
 /**
- * Bootstrap loaded in the browser when the server cannot fetch widget.js (401 / ORB / etc.).
- * Injects a classic <script src="…"> so the browser requests the CDN directly (often works when
- * server-side fetch is blocked by Deployment Protection or bot filters).
+ * Bootstrap when server fetch failed for a reason where the browser might still load the script
+ * (e.g. some CDNs allow browser cookies but not datacenter IPs).
  */
 function clientLoaderScript(): string {
   const src = WIDGET_SCRIPT_URL;
@@ -62,7 +66,11 @@ export async function GET() {
       headers: upstreamFetchHeaders(),
     });
     if (!res.ok) {
-      return new NextResponse(clientLoaderScript(), {
+      const body =
+        res.status === 401 || res.status === 403
+          ? clientAuthBlockedMessage()
+          : clientLoaderScript();
+      return new NextResponse(body, {
         status: 200,
         headers: {
           "Content-Type": "application/javascript; charset=utf-8",
