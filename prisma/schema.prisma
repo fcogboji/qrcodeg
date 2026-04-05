@@ -1,0 +1,19 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+/// Brand profile for per-customer QR styling (widget / SaaS tenants).
+model Customer {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  darkColor   String
+  lightColor  String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

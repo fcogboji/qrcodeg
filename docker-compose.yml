@@ -1,0 +1,14 @@
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      # Writable volume; Prisma SQLite URI (three slashes = absolute path)
+      DATABASE_URL: "file:///app/data/prod.db"
+    volumes:
+      - qr-data:/app/data
+    restart: unless-stopped
+
+volumes:
+  qr-data:
