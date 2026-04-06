@@ -1,16 +1,15 @@
 import { NextResponse } from "next/server";
 import {
-  WIDGET_SCRIPT_URL,
+  WIDGET_SCRIPT_UPSTREAM_URL,
   widgetDataAttributes,
   WIDGET_UPSTREAM_ORIGIN,
 } from "@/config/widget";
 
-const UPSTREAM_WIDGET =
-  process.env.WIDGET_SCRIPT_UPSTREAM_URL?.trim() || WIDGET_SCRIPT_URL;
+const UPSTREAM_WIDGET = WIDGET_SCRIPT_UPSTREAM_URL;
 
 /** One-line console helper when the widget host rejects anonymous access (browser would 401 too). */
 function clientAuthBlockedMessage(): string {
-  return `console.warn("[widget] ${WIDGET_SCRIPT_URL} returned 401/403. Disable Vercel Deployment Protection on the widget project, host widget.js on a public URL, or set WIDGET_VERCEL_BYPASS_SECRET on this app so /embed/widget-js can proxy the real file.");`;
+  return `console.warn("[widget] ${UPSTREAM_WIDGET} returned 401/403. Disable Vercel Deployment Protection on the widget project, host widget.js on a public URL, or set WIDGET_VERCEL_BYPASS_SECRET on this app so /embed/widget-js can proxy the real file.");`;
 }
 
 /**
@@ -18,7 +17,7 @@ function clientAuthBlockedMessage(): string {
  * (e.g. some CDNs allow browser cookies but not datacenter IPs).
  */
 function clientLoaderScript(): string {
-  const src = WIDGET_SCRIPT_URL;
+  const src = UPSTREAM_WIDGET;
   const apiBase = widgetDataAttributes["data-api-base"];
   const botId = widgetDataAttributes["data-bot-id"];
   const brand = widgetDataAttributes["data-brand"];

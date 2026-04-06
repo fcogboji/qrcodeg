@@ -3,10 +3,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { AuthSessionProvider } from "@/components/auth-session-provider";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { widgetDataAttributes } from "@/config/widget";
 import "./globals.css";
 import Script from "next/script";
-
-
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,6 +32,10 @@ export const metadata: Metadata = {
   },
 };
 
+/** Same-origin proxy only — never point this at the third-party `/embed/widget-js` URL. */
+const widgetScriptSrc =
+  process.env.NEXT_PUBLIC_WIDGET_EMBED_PATH?.trim() || "/embed/widget-js";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -49,14 +52,11 @@ export default function RootLayout({
           <div className="flex-1">{children}</div>
           <SiteFooter />
         </AuthSessionProvider>
-      <Script
-  src="https://24-7concept-pew4inhis-friday-s-projects.vercel.app/embed/widget-js?v=5"
-  defer
-  data-api-base="https://24-7concept-pew4inhis-friday-s-projects.vercel.app"
-  data-bot-id="cmnmbgw1200032txm31qsfwll"
-  data-brand="ab"
-/>
-
+        <Script
+          src={widgetScriptSrc}
+          strategy="afterInteractive"
+          {...widgetDataAttributes}
+        />
       </body>
     </html>
   );

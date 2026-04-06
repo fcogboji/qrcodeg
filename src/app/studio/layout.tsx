@@ -1,4 +1,4 @@
-import { auth } from "@/auth";
+import { getSession } from "@/lib/get-session";
 import { redirect } from "next/navigation";
 
 export default async function StudioLayout({
@@ -6,7 +6,7 @@ export default async function StudioLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await auth();
+  const session = await getSession();
   if (!session?.user) {
     redirect("/login?callbackUrl=/studio");
   }

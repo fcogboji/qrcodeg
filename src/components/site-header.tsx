@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { signOutAction } from "@/app/actions/sign-out";
-import { auth } from "@/auth";
+import { getSession } from "@/lib/get-session";
 
 const links = [
   { href: "/", label: "Overview" },
@@ -9,7 +9,7 @@ const links = [
 ] as const;
 
 export async function SiteHeader() {
-  const session = await auth();
+  const session = await getSession();
 
   return (
     <header className="sticky top-0 z-50 border-b border-zinc-200/80 bg-white/90 backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-950/90">
