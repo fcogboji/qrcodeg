@@ -18,7 +18,6 @@ function clientAuthBlockedMessage(): string {
  */
 function clientLoaderScript(): string {
   const src = UPSTREAM_WIDGET;
-  const apiBase = widgetDataAttributes["data-api-base"];
   const botId = widgetDataAttributes["data-bot-id"];
   const brand = widgetDataAttributes["data-brand"];
   return `(function(){
@@ -26,7 +25,7 @@ try{
 var s=document.createElement("script");
 s.src=${JSON.stringify(src)};
 s.async=true;
-s.setAttribute("data-api-base",${JSON.stringify(apiBase)});
+s.setAttribute("data-api-base",window.location.origin);
 s.setAttribute("data-bot-id",${JSON.stringify(botId)});
 s.setAttribute("data-brand",${JSON.stringify(brand)});
 (document.head||document.body).appendChild(s);

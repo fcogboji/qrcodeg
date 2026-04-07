@@ -22,9 +22,17 @@ export const WIDGET_SCRIPT_URL = `${WIDGET_UPSTREAM_ORIGIN.replace(/\/$/, "")}${
 export const WIDGET_SCRIPT_UPSTREAM_URL =
   process.env.WIDGET_SCRIPT_UPSTREAM_URL?.trim() || WIDGET_SCRIPT_URL;
 
+/**
+ * API base used by the widget runtime.
+ * Defaults to this app's origin so chat/actions stay on your domain.
+ */
+export const WIDGET_API_BASE =
+  process.env.NEXT_PUBLIC_WIDGET_API_BASE?.trim() ||
+  process.env.NEXT_PUBLIC_APP_URL?.trim() ||
+  "http://localhost:3000";
+
 /** `data-*` attrs for the widget runtime (match values from your widget dashboard). */
 export const widgetDataAttributes = {
-  "data-api-base": WIDGET_UPSTREAM_ORIGIN,
   "data-bot-id": process.env.NEXT_PUBLIC_WIDGET_BOT_ID ?? "cmnmbgw1200032txm31qsfwll",
   "data-brand": process.env.NEXT_PUBLIC_WIDGET_BRAND ?? "ab",
 } as const;
