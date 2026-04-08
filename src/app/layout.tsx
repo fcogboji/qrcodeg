@@ -52,11 +52,7 @@ export default function RootLayout({
           <div className="flex-1">{children}</div>
           <SiteFooter />
         </AuthSessionProvider>
-        <Script
-          src={widgetScriptSrc}
-          strategy="afterInteractive"
-          {...widgetDataAttributes}
-        />
+      
       </body>
     </html>
   );

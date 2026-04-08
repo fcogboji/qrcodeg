@@ -158,6 +158,7 @@ export default function HomePage() {
             connectivity
           </li>
         </ul>
+        <script src="https://24-7concept.vercel.app/embed/widget.js" defer data-api-base="https://24-7concept.vercel.app" data-bot-id="cmnqbu87n0001g7jfxigm69f3" data-brand="qr"></script>
       </section>
     </main>
   );
